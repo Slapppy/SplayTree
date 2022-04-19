@@ -163,7 +163,6 @@ class SplayTree:
 
 
 # tree = SplayTree()
-#
 # node1 = Node(9)
 # node2 = Node(3)
 # node3 = Node(7)
@@ -171,7 +170,6 @@ class SplayTree:
 # node5 = Node(32)
 # node6 = Node(1)
 # node7 = Node(4)
-#
 # tree.insert(node1)
 # tree.insert(node2)
 # tree.insert(node3)
