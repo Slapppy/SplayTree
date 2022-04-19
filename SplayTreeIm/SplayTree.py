@@ -5,6 +5,7 @@ class Node:
         self.left = None
         self.right = None
 
+
     def __str__(self):
         return str(self.data)
 
