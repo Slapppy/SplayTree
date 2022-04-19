@@ -6,6 +6,7 @@ from SplayTreeIm.SplayTree import SplayTree, Node
 def test_splay_tree(treesize=1000):
     print("Building trees")
 
+
     spltree = SplayTree()
     x = [i for i in range(0, treesize)]
     for n in x:
