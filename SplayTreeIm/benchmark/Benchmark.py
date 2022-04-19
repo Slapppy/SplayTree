@@ -49,7 +49,7 @@ def worst_case_search():
                 _list.append(line)
             with open(r'C:\Users\Slappy\PycharmProjects\SplayTree\SplayTreeIm\benchmark\Results\search_worst.csv' , 'a') as case:
                 write_line = writer(case)
-                write_line.writerow(['search']+[[len(_list)]] + [test_search(_list)])
+                write_line.writerow(['search']+[len(_list)] + [test_search(_list)])
 
 def worst_case_delete():
     for i in range(1, 5 + 1):
