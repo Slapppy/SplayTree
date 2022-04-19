@@ -5,9 +5,6 @@ from random import randint
 from SplayTreeIm.SplayTree import SplayTree, Node
 
 spltree = SplayTree()
-n = 10000
-dataset = []
-dataset1 = [i for i in range(0, n)]
 
 
 def test_insert(dataset, tree=spltree):
