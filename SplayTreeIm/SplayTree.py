@@ -1,6 +1,3 @@
-import sys
-
-
 class Node:
     def __init__(self, data):
         self.data = data
@@ -16,44 +13,70 @@ class SplayTree:
     def __init__(self):
         self.root = None
 
-    def insert(self, data):
-        node = Node(data)
-        x = self.root
-        y = None
+    def max_elem(self, key):
+        while key.right != None:
+            key = key.right
+        return key
 
-        while x != None:
-            y = x
-            if node.data < x.data:
-                x = x.left
+    def insert(self, node):
+        temp = None
+        root = self.root
+        while root != None:
+            temp = root
+            if node.data < root.data:
+                root = root.left
             else:
-                x = x.right
-        node.parent = y
-        if y == None:
+                root = root.right
+
+        node.parent = temp
+        if temp == None:
             self.root = node
-        elif node.data < y.data:
-            y.left = node
+        elif node.data < temp.data:
+            temp.left = node
         else:
-            y.right = node
-        self.splay(node)
+            temp.right = node
 
+        self.__splay(node)
 
-    def __binary_search(self, node, key):
-        if node == None or key == node.data:
-            return node
-        if node.data < key:
-            return self.__binary_search(node.right, key)
-        return self.__binary_search(node.left, key)
+    def search_tree(self, node):
+        current = self.root
+        while current and current.data != node.data:
+            if current.data < node.data:
+                current = current.right
+            else:
+                current = current.left
+        self.__splay(current)
+        return current
 
-    def search_tree(self, key):
-        x = self.__binary_search(self.root, key)
-        if x != None:
-            self.splay(x)
-            return key
+    def __join(self, s, t):
+        if s == None:
+            return t
 
-    def delete(self):
-        pass
+        if t == None:
+            return s
 
-    def right_rotate(self, x):
+        x = self.max_elem(s)
+        self.__splay(x)
+        x.right = t
+        t.parent = x
+        return x
+
+    def delete(self, x):
+        # Split
+        self.__splay(x)
+        if x.right != None:
+            temp = x.right
+            temp.parent = None
+        else:
+            temp = None
+        s = x
+        s.right = None
+        # join
+        if s.left != None:
+            s.left.parent = None
+        self.root = self.__join(s.left, temp)
+
+    def __right_rotate(self, x):
         y = x.left
         x.left = y.right
         if y.right != None:
@@ -70,7 +93,7 @@ class SplayTree:
         y.right = x
         x.parent = y
 
-    def left_rotate(self, x):
+    def __left_rotate(self, x):
         y = x.right
         x.right = y.left
         if y.left != None:
@@ -86,28 +109,31 @@ class SplayTree:
         y.left = x
         x.parent = y
 
-    def splay(self, node):
-        while node.parent != None:
-            if node.parent == self.root:
-                if node == node.parent.left:
-                    self.right_rotate(node.parent)
+    def __splay(self, x):
+        while x.parent != None:
+            if x.parent.parent == None:
+                if x == x.parent.left:
+                    # zig
+                    self.__right_rotate(x.parent)
                 else:
-                    self.left_rotate(node.parent)
+                    # zag
+                    self.__left_rotate(x.parent)
+            elif x == x.parent.left and x.parent == x.parent.parent.left:
+                # zig-zig
+                self.__right_rotate(x.parent.parent)
+                self.__right_rotate(x.parent)
+            elif x == x.parent.right and x.parent == x.parent.parent.right:
+                # zag-zag
+                self.__left_rotate(x.parent.parent)
+                self.__left_rotate(x.parent)
+            elif x == x.parent.right and x.parent == x.parent.parent.left:
+                # zig-zag
+                self.__left_rotate(x.parent)
+                self.__right_rotate(x.parent)
             else:
-                parent = node.parent
-                grandParent = parent.parent
-                if node.parent.left == node and parent.parent.left == parent:
-                    self.right_rotate(grandParent)
-                    self.right_rotate(parent)
-                elif node.parent.right == node and parent.parent.right == parent:
-                    self.left_rotate(grandParent)
-                    self.left_rotate(parent)
-                elif node.parent.right == node and parent.parent.left == parent:
-                    self.left_rotate(parent)
-                    self.right_rotate(grandParent)
-                elif node.parent.left == node and parent.parent.right == parent:
-                    self.right_rotate(parent)
-                    self.left_rotate(grandParent)
+                # zag-zig
+                self.__right_rotate(x.parent)
+                self.__left_rotate(x.parent)
 
     def preOrder(self, node):
         if (node != None):
@@ -127,7 +153,6 @@ class SplayTree:
             self.postOrder(node.right)
             print(" " + str(node.data), end="")
 
-    #  This are handling the request to display tree elements
     def printTree(self):
         print(" Preorder:")
         self.preOrder(self.root)
@@ -137,19 +162,26 @@ class SplayTree:
         self.postOrder(self.root)
 
 
-tree = SplayTree()
-
-
-
-tree.insert(9)
-tree.insert(3)
-tree.insert(7)
-tree.insert(13)
-tree.insert(32)
-tree.insert(1)
-tree.insert(4)
-
-tree.printTree()
+# tree = SplayTree()
+#
+# node1 = Node(9)
+# node2 = Node(3)
+# node3 = Node(7)
+# node4 = Node(13)
+# node5 = Node(32)
+# node6 = Node(1)
+# node7 = Node(4)
+#
+# tree.insert(node1)
+# tree.insert(node2)
+# tree.insert(node3)
+# tree.insert(node4)
+# tree.insert(node5)
+# tree.insert(node6)
+# tree.insert(node7)
+# #tree.search_tree(node5)
+# tree.delete(node5)
+# tree.printTree()
 # Preorder:
 #  4 1 3 9 7 32 13
 #  Inorder:
