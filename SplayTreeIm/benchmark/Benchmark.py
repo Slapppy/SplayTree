@@ -1,6 +1,5 @@
 import time
 from csv import writer
-import pandas as pd
 from SplayTreeIm.SplayTree import SplayTree, Node
 
 spltree = SplayTree()
@@ -33,7 +32,7 @@ def test_delete(dataset, tree=spltree):
 
 def worst_case_insert():
     for i in range(1, 5 + 1):
-        with open(f'data_worst{i}.txt', 'r') as file:
+        with open(f'dataset/data_worst{i}.txt', 'r') as file:
             _list = []
             for line in file:
                 _list.append(line)
@@ -44,7 +43,7 @@ def worst_case_insert():
 
 def worst_case_search():
     for i in range(1, 5 + 1):
-        with open(f'data_worst{i}.txt', 'r') as file:
+        with open(f'dataset/data_worst{i}.txt', 'r') as file:
             _list = []
             for line in file:
                 _list.append(line)
@@ -55,7 +54,7 @@ def worst_case_search():
 
 def worst_case_delete():
     for i in range(1, 5 + 1):
-        with open(f'data_worst{i}.txt', 'r') as file:
+        with open(f'dataset/data_worst{i}.txt', 'r') as file:
             _list = []
             for line in file:
                 _list.append(line)
@@ -66,7 +65,7 @@ def worst_case_delete():
 
 def case_insert():
     for i in range(1, 5 + 1):
-        with open(f'dataset{i}.txt', 'r') as file:
+        with open(f'dataset/data_worst{i}.txt', 'r') as file:
             _list = []
             for line in file:
                 _list.append(line)
@@ -78,7 +77,7 @@ def case_insert():
 
 def case_search():
     for i in range(1, 5 + 1):
-        with open(f'dataset{i}.txt', 'r') as file:
+        with open(f'dataset/data_worst{i}.txt', 'r') as file:
             _list = []
             for line in file:
                 _list.append(line)
@@ -90,7 +89,7 @@ def case_search():
 
 def case_delete():
     for i in range(1, 5 + 1):
-        with open(f'dataset{i}.txt', 'r') as file:
+        with open(f'dataset/data_worst{i}.txt', 'r') as file:
             _list = []
             for line in file:
                 _list.append(line)
