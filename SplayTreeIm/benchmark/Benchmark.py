@@ -22,6 +22,7 @@ def test_search(dataset, tree=spltree):
     return "%.8f" % (t2 - t1)
 
 
+
 def test_delete(dataset, tree=spltree):
     t1 = time.time()
     for i in dataset:
