@@ -161,7 +161,6 @@ class SplayTree:
         print("\n Postorder:")
         self.postOrder(self.root)
 
-
 # tree = SplayTree()
 # node1 = Node(9)
 # node2 = Node(3)
@@ -177,7 +176,7 @@ class SplayTree:
 # tree.insert(node5)
 # tree.insert(node6)
 # tree.insert(node7)
-# #tree.search_tree(node5)
+# tree.search_tree(node5)
 # tree.delete(node5)
 # tree.printTree()
 # Preorder:

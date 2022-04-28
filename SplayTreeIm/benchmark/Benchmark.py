@@ -1,4 +1,6 @@
+import random
 import time
+from random import randint,shuffle
 from csv import writer
 from SplayTreeIm.SplayTree import SplayTree, Node
 
@@ -19,7 +21,6 @@ def test_search(dataset, tree=spltree):
         tree.search_tree(Node(i))
     t2 = time.time()
     return "%.8f" % (t2 - t1)
-
 
 
 def test_delete(dataset, tree=spltree):
@@ -58,7 +59,7 @@ def worst_case_delete():
             _list = []
             for line in file:
                 _list.append(line)
-            with open('Results/delete_worst.csv','a') as case:
+            with open('Results/delete_worst.csv', 'a') as case:
                 write_line = writer(case)
                 write_line.writerow(['delete'] + [len(_list)] + [test_delete(_list)])
 
@@ -99,9 +100,8 @@ def case_delete():
                 write_line.writerow(['delete'] + [len(_list)] + [test_delete(_list)])
 
 
-worst_case_insert()
-worst_case_search()
-worst_case_delete()
-case_insert()
-case_search()
-case_delete()
+# n = 100000
+# dataset = [randint(1, 10000) for i in range(n)]
+# test_insert(dataset)
+
+
